@@ -12,10 +12,12 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        node-version: [20, 22, 24, latest]
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -25,12 +27,13 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
+          cache: false
 
       - name: Install seek CLI
         run: go install github.com/dualeai/seek/cmd/seek@latest
 
-      - name: Verify seek
-        run: seek -version
+      - name: Verify seek indexes the repo
+        run: seek 'SERVER_NAME'
 
       - run: npm ci
 
