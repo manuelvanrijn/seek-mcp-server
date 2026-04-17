@@ -1,4 +1,11 @@
 import { spawn } from "node:child_process";
+import { spawnSync } from "node:child_process";
+
+const seekCheck = spawnSync("seek", ["--help"], { stdio: "ignore" });
+if (seekCheck.error) {
+  console.log("Skipping integration test: seek CLI not available in PATH.");
+  process.exit(0);
+}
 
 const cases = [
   ["plain_substring", "SERVER_NAME"],
