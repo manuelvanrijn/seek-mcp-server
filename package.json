@@ -45,7 +45,7 @@
   "homepage": "https://github.com/manuelvanrijn/seek-mcp-server#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
-    "zod": "^3.24.2"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
