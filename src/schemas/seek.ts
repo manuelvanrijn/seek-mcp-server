@@ -10,7 +10,7 @@ export const seekSearchInputSchema = z
   .object({
     query: z
       .string()
-      .describe("Full seek query string, for example: sym:Coach file:role_models"),
+      .describe("Full seek query string, for example: sym:User file:models"),
     max_results: z
       .number()
       .int()
