@@ -10,7 +10,26 @@ export function registerSeekSearchTool(server: McpServer): void {
     {
       title: "Seek Search",
       description:
-        "Primary code search tool for this workspace. Use for symbol lookup (sym:), file discovery (type:file), and content search (content:). Supports language filtering (lang:) and path include/exclude (file:/-file:).",
+        [
+          "Primary tool for named code lookup and scoped local code search in this workspace.",
+          "",
+          "Use first for:",
+          "- known symbol, class, method, file, path, or regex lookup",
+          "- definition lookup with sym:",
+          "- filename lookup with type:file",
+          "- scoped local search with file:/-file:, lang:, content:, or regex:",
+          "",
+          "Not first for:",
+          "- architecture, patterns, end-to-end flow, or how/why questions",
+          "- callers, references, implementations, or type information when an LSP tool is available",
+          "- exact non-code literal lookup",
+          "",
+          "Query notes:",
+          "- pass one full seek query string in query",
+          "- use sym:, type:file, file:/-file:, lang:, content:, regex:, and or / (...)",
+          "- results are ranked by relevance and grouped by file",
+          "- no matches return '(no results)'"
+        ].join("\n"),
       inputSchema: seekSearchInputSchema,
       outputSchema: seekSearchOutputSchema,
       annotations: {

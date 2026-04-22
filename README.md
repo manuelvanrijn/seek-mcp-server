@@ -2,7 +2,7 @@
 
 MCP stdio server package that exposes the seek CLI as one read-only tool: `seek_search`.
 
-## 1) Install seek CLI
+## Install seek CLI
 
 seek project: https://github.com/dualeai/seek
 
@@ -18,7 +18,7 @@ Then verify:
 seek -version
 ```
 
-## 2) Use the published npm package
+## Use the published npm package
 
 You can run it directly with `npx` (no global install required).
 
@@ -56,6 +56,38 @@ Optional environment variables:
 	}
 }
 ```
+
+## Agent-facing query guidance
+
+`seek_search` is best for named code lookup and scoped local search.
+
+Use it for:
+
+- known symbol, class, or method lookup
+- filename or path lookup
+- scoped content search with language or path filters
+- ranked code search where relevance matters
+
+Do not use it as the first tool for architecture, pattern, flow, or how/why questions. Those are better served by semantic/codebase-understanding tools.
+
+Also do not use it as the first tool for callers, references, implementations, or type information when an LSP tool is available.
+
+The MCP tool accepts one argument named `query`. Pass the full seek query as one string and combine filters inside that string.
+
+Useful query patterns:
+
+- `sym:handleRequest` — definition lookup via ctags
+- `type:file config` — filename lookup only
+- `handleRequest file:api -file:test` — path include/exclude filters
+- `content:async def.*handler lang:python` — content search scoped to one language
+- `regex:class\s+Validator` — explicit regex search
+- `(lang:go or lang:python) ValidationError` — boolean grouping
+
+Result behavior:
+
+- results are ranked by relevance
+- results are grouped by file
+- no matches return `(no results)` rather than an error
 
 ## Test
 
