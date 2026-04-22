@@ -66,3 +66,21 @@ npm test
 ```
 
 The test lives at tests/integration/seek-mcp-visible-test.mjs.
+
+## Releasing
+
+Publishing to npm is fully automated via `.github/workflows/publish.yml`, triggered by pushing a `v*.*.*` tag.
+
+From a clean `main`:
+
+```bash
+git switch main && git pull
+npm version patch   # or: minor | major
+git push --follow-tags
+```
+
+`npm version` bumps `package.json` + `package-lock.json`, creates a commit and annotated tag `vX.Y.Z`. The tag push triggers the workflow, which:
+
+1. Verifies the tag matches `package.json` version.
+2. Creates a GitHub Release with auto-generated notes.
+3. Publishes to npm with `--provenance` (OIDC / sigstore).
