@@ -1,6 +1,6 @@
 {
   "name": "@manuelvanrijn/seek-mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP stdio server package that exposes the seek CLI as a typed MCP tool",
   "type": "module",
   "main": "dist/index.js",
